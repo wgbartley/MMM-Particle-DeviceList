@@ -1,0 +1,14 @@
+{
+  "name": "mmm-particle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mmm-particle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "particle-api-js": "^6.4.3"
+  }
+}
