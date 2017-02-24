@@ -6,7 +6,8 @@ Module.register("MMM-Particle-DeviceList", {
 		password: '',
 		token: '',
         online_color: '#3dbbc4',
-        offline_color: '#164032'
+        offline_color: '#164032',
+        update_interval: 5 * 60 * 1000 // Default 5 minutes
     },
 
     state: 0,
@@ -14,6 +15,13 @@ Module.register("MMM-Particle-DeviceList", {
 
 
     start: function() {
+        var self = this;
+
+        // Make sure the update_interval is reasonable (minimum 30 seconds)
+        if(this.config.update_interval < 30 * 1000)
+            this.config.update_interval = 30 * 1000;
+
+
         // If we don't have a token, use the user/pass to get one
         if(this.config.token.length==0) {
             this.state = 0;
@@ -28,6 +36,11 @@ Module.register("MMM-Particle-DeviceList", {
             this.state = 1;
             this.sendSocketNotification("SET_TOKEN", this.config.token);
         }
+
+        // Refresh list at an interval
+        setInterval(function() {
+            self.sendSocketNotification("LIST_DEVICES");
+        }, self.config.update_interval);
 	},
 
 
@@ -37,7 +50,7 @@ Module.register("MMM-Particle-DeviceList", {
         wrapper.innerHTML = '';
 
         if(this.config.title.length>0)
-            wrapper.innerHTML += '<b>'+this.config.title+'</b>';
+            wrapper.innerHTML += '<div style="font-weight:bold">'+this.config.title+'</div>';
 
         switch(this.state) {
             case 0:

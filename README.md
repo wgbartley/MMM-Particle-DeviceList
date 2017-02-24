@@ -46,3 +46,4 @@ The following properties can be configured:
 | `title` | A title for the device list - Defaults to "Particle Device List" |
 | `online_color` | Color to use for online devices - Defaults to `#3dbbc4` |
 | `offline_color` | Color to use for offline devices - Defaults to `#164032` |
+| `update_interval` | Frequency (in milliseconds) to refresh the list - Default 5 minutes |
