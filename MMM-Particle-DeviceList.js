@@ -23,7 +23,7 @@ Module.register("MMM-Particle-DeviceList", {
 
 
         // If we don't have a token, use the user/pass to get one
-        if(this.config.token.length==0) {
+        if(this.config.token.length===0) {
             this.state = 0;
 
     		this.sendSocketNotification("AUTHENTICATE", {
